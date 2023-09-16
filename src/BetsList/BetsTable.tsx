@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Bet, { BetSingleType } from './Bet';
+import { calculatePayout } from '../utils/calculatePayout';
 
 type Props = {
   bets: BetSingleType[];
 };
 
 const List = styled.div`
-  max-width: 600px;
   border-left: 2px solid #ccc;
   border-right: 2px solid #ccc;
 `;
@@ -19,6 +19,10 @@ const ListHeader = styled.div`
   padding: 0 8px;
   border-top: 2px solid #ccc;
   border-bottom: 2px solid #ccc;
+`;
+
+const ListSummary = styled(ListHeader)`
+  border-top: none;
 `;
 
 const Cell = styled.div`
@@ -44,6 +48,12 @@ const AllBets = styled.div`
 `;
 
 const BetsTable: React.FC<Props> = ({ bets }) => {
+  const totalStake = bets.reduce((acc, bet) => acc + bet.stake, 0);
+  const totalPayout = bets.reduce(
+    (acc, bet) => acc + Number(calculatePayout(bet.odds, bet.stake)),
+    0
+  );
+
   return (
     <List>
       <ListHeader>
@@ -54,10 +64,17 @@ const BetsTable: React.FC<Props> = ({ bets }) => {
         <Cell>date</Cell>
       </ListHeader>
       <AllBets>
-        {bets.map((bet) => (
-          <Bet key={bet.id} {...bet} />
+        {bets.map((bet, index) => (
+          <Bet key={`bet-${index}`} {...bet} />
         ))}
       </AllBets>
+      <ListSummary>
+        <Cell>-</Cell>
+        <Cell>{totalStake}</Cell>
+        <Cell>{totalPayout}</Cell>
+        <Cell>-</Cell>
+        <Cell>-</Cell>
+      </ListSummary>
     </List>
   );
 };
