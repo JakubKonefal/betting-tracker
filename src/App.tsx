@@ -5,15 +5,7 @@ import BetsList from './BetsList/BetsTable';
 import BetInput from './BetInput/BetInput';
 import { getBets } from './utils/getBets';
 
-import type { BetSingleType } from './BetsList/Bet';
-
-type BetSingleFromDB = {
-  id: number;
-  odds: number;
-  stake: number;
-  result: boolean;
-  date: string;
-};
+import type { BetSingleType } from 'types';
 
 const ListContainer = styled.div`
   padding: 10px;
@@ -25,7 +17,7 @@ function App() {
 
   useEffect(() => {
     const fetchBets = async () => {
-      const fetchedBets = (await getBets()) as BetSingleFromDB[];
+      const fetchedBets = (await getBets()) as BetSingleType[];
 
       const parsedBets = fetchedBets.map((bet) => ({
         ...bet,

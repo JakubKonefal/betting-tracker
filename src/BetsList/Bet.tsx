@@ -2,13 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { calculatePayout } from '../utils/calculatePayout';
 
-export type BetSingleType = {
-  id: number;
-  odds: number;
-  stake: number;
-  result: boolean;
-  date: string;
-};
+import type { BetSingleType } from 'types';
 
 const BetWrapper = styled.div`
   display: grid;

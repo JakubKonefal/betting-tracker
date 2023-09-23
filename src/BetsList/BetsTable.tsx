@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Bet, { BetSingleType } from './Bet';
+import Bet from './Bet';
 import { calculatePayout } from '../utils/calculatePayout';
+
+import type { BetSingleType } from 'types';
 
 type Props = {
   bets: BetSingleType[];
