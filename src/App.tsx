@@ -9,7 +9,7 @@ import type { BetSingleType } from 'types';
 
 const ListContainer = styled.div`
   padding: 10px;
-  max-width: 600px;
+  max-width: 1000px;
 `;
 
 function App() {
@@ -19,14 +19,9 @@ function App() {
     const fetchBets = async () => {
       const fetchedBets = (await getBets()) as BetSingleType[];
 
-      const parsedBets = fetchedBets.map((bet) => ({
-        ...bet,
-        result: !bet.result ? false : true,
-      }));
+      console.log({ fetchedBets });
 
-      console.log({ fetchedBets, parsedBets });
-
-      setBets(parsedBets);
+      setBets(fetchedBets);
     };
 
     fetchBets();

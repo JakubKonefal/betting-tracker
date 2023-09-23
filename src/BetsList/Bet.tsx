@@ -11,7 +11,7 @@ const BetWrapper = styled.div`
   padding: 0 8px;
 `;
 
-const Cell = styled.div<{ green?: boolean; red?: boolean }>`
+const Cell = styled.div<{ green?: boolean; red?: boolean; yellow?: boolean }>`
   position: relative;
   padding: 8px 4px;
 
@@ -38,6 +38,12 @@ const Cell = styled.div<{ green?: boolean; red?: boolean }>`
     css`
       background-color: red;
     `}
+
+    ${({ yellow }) =>
+    yellow &&
+    css`
+      background-color: yellow;
+    `}
 `;
 
 const Bet: React.FC<BetSingleType> = ({ id, odds, stake, result, date }) => {
@@ -48,7 +54,11 @@ const Bet: React.FC<BetSingleType> = ({ id, odds, stake, result, date }) => {
       <Cell>{odds}</Cell>
       <Cell>{stake}</Cell>
       <Cell>{payout}</Cell>
-      <Cell green={result} red={!result} />
+      <Cell
+        green={result === 'win'}
+        red={result === 'lose'}
+        yellow={result === 'cashout'}
+      />
       <Cell>{date}</Cell>
     </BetWrapper>
   );

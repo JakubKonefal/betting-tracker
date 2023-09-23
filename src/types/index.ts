@@ -1,9 +1,12 @@
+export type Result = 'win' | 'lose' | 'cashout';
+
 export type BetSingleType = {
   id: number;
   odds: number;
   stake: number;
-  result: boolean;
+  result: Result;
   date: string;
-  predefinedPayout?: number;
-  cashout?: boolean;
+  predefinedPayout: number;
+  cashout: boolean;
+  live: boolean;
 };
