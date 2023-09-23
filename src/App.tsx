@@ -11,7 +11,7 @@ type BetSingleFromDB = {
   id: number;
   odds: number;
   stake: number;
-  result: string;
+  result: boolean;
   date: string;
 };
 
@@ -25,12 +25,14 @@ function App() {
 
   useEffect(() => {
     const fetchBets = async () => {
-      const bets = (await getBets()) as BetSingleFromDB[];
+      const fetchedBets = (await getBets()) as BetSingleFromDB[];
 
-      const parsedBets = bets.map((bet) => ({
+      const parsedBets = fetchedBets.map((bet) => ({
         ...bet,
-        result: bet.result === '0' ? false : true,
+        result: !bet.result ? false : true,
       }));
+
+      console.log({ fetchedBets, parsedBets });
 
       setBets(parsedBets);
     };

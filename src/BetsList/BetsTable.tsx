@@ -48,11 +48,11 @@ const AllBets = styled.div`
 `;
 
 const BetsTable: React.FC<Props> = ({ bets }) => {
-  const totalStake = bets.reduce((acc, bet) => acc + bet.stake, 0);
-  const totalPayout = bets.reduce(
-    (acc, bet) => acc + Number(calculatePayout(bet.odds, bet.stake)),
-    0
-  );
+  const totalStake = bets.reduce((acc, bet) => acc + bet.stake, 0).toFixed(2);
+  const totalPayout = bets
+    .filter((bet) => bet.result)
+    .reduce((acc, bet) => acc + Number(calculatePayout(bet.odds, bet.stake)), 0)
+    .toFixed(2);
 
   return (
     <List>
