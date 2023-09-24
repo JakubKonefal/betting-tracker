@@ -81,7 +81,7 @@ const BetInput: React.FC<Props> = ({ newBetNumber }) => {
   const [odds, setOdds] = useState<string>('');
   const [stake, setStake] = useState<string>('');
   const [result, setResult] = useState<string>('');
-  const [predefinedPayout, setPredefinedPayout] = useState<string>('');
+  const [cashoutValue, setCashoutValue] = useState<string>('');
   const [cashout, setCashout] = useState<string>('');
   const [live, setLive] = useState<string>('');
   const [date, setDate] = useState<string>('');
@@ -112,9 +112,9 @@ const BetInput: React.FC<Props> = ({ newBetNumber }) => {
         odds: Number(odds),
         stake: Number(stake),
         result: parsedResult,
-        predefinedPayout: Number(predefinedPayout),
-        cashout: Boolean(cashout),
-        live: Boolean(live),
+        cashoutValue: Number(cashoutValue),
+        cashout: Boolean(Number(cashout)),
+        live: Boolean(Number(live)),
         date: date,
       },
       newBetNumber
@@ -125,7 +125,7 @@ const BetInput: React.FC<Props> = ({ newBetNumber }) => {
         setOdds('');
         setStake('');
         setResult('');
-        setPredefinedPayout('');
+        setCashoutValue('');
         setCashout('');
         setDate('');
         setLive('');
@@ -161,11 +161,11 @@ const BetInput: React.FC<Props> = ({ newBetNumber }) => {
           value={result}
         />
         <Input
-          id='predefined-payout'
+          id='cashout-value'
           type='text'
-          placeholder='Predefined payout'
-          onChange={(event) => setPredefinedPayout(event.target.value)}
-          value={predefinedPayout}
+          placeholder='Cashout value'
+          onChange={(event) => setCashoutValue(event.target.value)}
+          value={cashoutValue}
         />
         <Input
           id='cashout'
